@@ -21,8 +21,8 @@ const Header = () => {
     return () => clearInterval(intervalId);
   }, [shuffle]);
   return (
-    <header className="text-white bg-yellow-800 text-center">
-      <div className="p-1 text-sm max-w-2xl">
+    <header className="text-white bg-brown text-center">
+      <div className="py-2 text-sm max-w-6xl m-auto transform md:translate-x-12">
         <SwitchTransition mode="out-in">
           <CSSTransition
             key={uuidv4()}
