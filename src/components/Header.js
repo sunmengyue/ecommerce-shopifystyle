@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import '../App.css';
 import { v4 as uuidv4 } from 'uuid';
