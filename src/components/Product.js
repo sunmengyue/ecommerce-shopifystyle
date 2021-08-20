@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { starIcon } from '@heroicons/react/solid';
 import { StarIcon } from '@heroicons/react/solid';
 import Currency from 'react-currency-formatter';
 
