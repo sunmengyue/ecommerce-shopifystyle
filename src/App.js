@@ -1,23 +1,18 @@
 import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import productContext from './utils/productContext';
-import Header from './components/Header';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import ProductFeed from './components/ProductFeed';
-import Footer from './components/Footer';
+import Home from './pages/Home';
 
 function App() {
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   return (
     <productContext.Provider value={{ showSearchBar, setShowSearchBar }}>
-      <div className="App">
-        <Header />
-        <Navbar />
-        <Hero />
-        <ProductFeed />
-        <Footer />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+        </Switch>
+      </Router>
     </productContext.Provider>
   );
 }

@@ -9,6 +9,10 @@ module.exports = {
           light: '#FEEFDF',
         },
       },
+      padding: {
+        '1/3': '33.3333%',
+        '2/3': '66.6667%',
+      },
     },
   },
   variants: {

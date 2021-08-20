@@ -7,3 +7,9 @@
     @apply cursor-pointer hover:underline;
   }
 }
+
+@layer utilities {
+  .h-250 {
+    height: 250px;
+  }
+}

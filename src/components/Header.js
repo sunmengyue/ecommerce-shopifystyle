@@ -19,6 +19,7 @@ const Header = () => {
     let intervalId = setInterval(shuffle, 3000);
     return () => clearInterval(intervalId);
   }, [shuffle]);
+
   return (
     <header className="text-white bg-brown text-center">
       <div className="py-2 text-sm max-w-6xl m-auto transform md:translate-x-12">
