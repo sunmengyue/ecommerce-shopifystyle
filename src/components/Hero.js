@@ -13,7 +13,7 @@ const Hero = () => {
         <h1 className="uppercase text-white text-2xl font-bold tracking-wider sm:text-3xl md:text-4xl xl:text-5xl transform md:translate-x-12">
           Find your unique style today
         </h1>
-        <button className="cursor-pointer bg-white uppercase text-sm  py-2 px-4 mt-8 focus:outline-none md:text-base md:py-3 md:px-6 hover:bg-gray-100 transform md:translate-x-12 xl:mt-14 xl:py-4 xl:px-8 xl:text-lg">
+        <button className="cursor-pointer bg-white uppercase text-sm  py-2 px-4 mt-8 focus:outline-none md:text-base md:py-3 md:px-6 hover:bg-gray-100 transform md:translate-x-12 xl:mt-14">
           shop now
         </button>
       </div>

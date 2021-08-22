@@ -12,6 +12,12 @@
 }
 
 @layer utilities {
+  .w-280 {
+    width: 280px;
+  }
+  .h-280 {
+    height: 280px;
+  }
   .h-450 {
     height: 450px;
   }

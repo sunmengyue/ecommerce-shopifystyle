@@ -14,7 +14,7 @@ const Navbar = () => {
     setShowSearchBar(!showSearchBar);
   };
   return (
-    <div className="bg-brown-light px-10">
+    <div className="bg-brown-light px-10 top-0">
       <nav className="py-5 ">
         <div className="max-w-6xl m-auto flex justify-between items-center ">
           {/* left */}

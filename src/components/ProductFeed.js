@@ -7,7 +7,7 @@ const ProductFeed = () => {
   const { products } = productsData;
 
   return (
-    <div className="bg-gray-100  max-w-8xl m-auto grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="bg-gray-100  max-w-7xl m-auto grid grid-flow-row-dense md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {products.slice(0, 4).map((product) => (
         <Product key={product.id} product={product} />
       ))}
@@ -15,7 +15,7 @@ const ProductFeed = () => {
         <img
           src="./images/division.jpg"
           alt="division"
-          className="absolute w-full h-full inset-0 object-cover"
+          className="absolute w-screen h-full inset-0 object-cover"
         />
         <div className="absolute inset-0 bg-gray-800 bg-opacity-40"></div>
       </div>
