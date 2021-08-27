@@ -9,8 +9,8 @@ const Product = ({ product }) => {
   const [rating] = useState(Math.floor(Math.random() * (MAX - MIN + 1) + MIN));
 
   return (
-    <div className="flex flex-col items-center mt-6">
-      <div className="bg-white cursor-pointer relative w-280 h-280 p-5 flex items-center justify-center">
+    <div className="flex flex-col items-center mt-6 ">
+      <div className="bg-white cursor-pointer relative w-280 h-280 p-5 flex items-center justify-center transform hover:scale-105 transition duration-100 ease-in-out">
         <p className="absolute right-4 top-3 text-xs italic text-gray-400">
           {product.category}
         </p>
