@@ -1,24 +1,16 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/solid';
 import Currency from 'react-currency-formatter';
+import Modal from './Modal';
 
 const Product = ({ product }) => {
-  const history = useHistory();
-
   const MIN = 1;
   const MAX = 5;
   const [rating] = useState(Math.floor(Math.random() * (MAX - MIN + 1) + MIN));
 
-  const redirect = () => {
-    history.push(`/products/${product.id}`);
-  };
   return (
     <div className="flex flex-col items-center mt-6">
-      <div
-        className="bg-white cursor-pointer relative w-280 h-280 p-5 flex items-center justify-center"
-        onClick={redirect}
-      >
+      <div className="bg-white cursor-pointer relative w-280 h-280 p-5 flex items-center justify-center">
         <p className="absolute right-4 top-3 text-xs italic text-gray-400">
           {product.category}
         </p>

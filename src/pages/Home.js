@@ -1,15 +1,17 @@
-import React from 'react';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
-import ProductFeed from '../components/ProductFeed';
+import React, { useContext, useState } from 'react';
+import productContext from '../utils/productContext';
+import FeaturedItems from '../components/FeaturedItems';
+import NewArrivals from '../components/NewArrivals';
 import Footer from '../components/Footer';
-import Hero from '../components/Hero';
 
 const Home = () => {
+  const productsData = useContext(productContext);
+  const { products } = productsData;
+  const [showModal, setShowModal] = useState('false');
   return (
     <div className="bg-gray-100">
-      <Hero />
-      <ProductFeed />
+      <NewArrivals />
+      <FeaturedItems />
       <Footer />
     </div>
   );

@@ -21,12 +21,13 @@ const Navbar = () => {
           <div>
             <div className="flex justify-between md:hidden">
               <MenuIcon className="h-6 mr-2 cursor-pointer" />
-              <SearchIcon className="h-6 cursor-pointer" />
+              <button onClick={toggleSearchBar}>
+                <SearchIcon className="h-6 cursor-pointer" />
+              </button>
             </div>
             <ul className="hidden md:flex justify-between items-center font-semibold space-x-8 text-sm">
               <li className="link tracking-wide">Shop all</li>
               <li className="link tracking-wide">Featured items</li>
-              <li className="link tracking-wide">About us</li>
             </ul>
           </div>
           {/* Middle */}
