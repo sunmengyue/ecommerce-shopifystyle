@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="text-white bg-brown text-center">
-      <div className="py-2 text-sm max-w-6xl m-auto transform md:translate-x-12">
+      <div className="py-2 text-sm max-w-6xl m-auto transform">
         <SwitchTransition mode="out-in">
           <CSSTransition
             key={uuidv4()}
