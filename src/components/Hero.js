@@ -1,9 +1,6 @@
-import React, { useContext } from 'react';
-import productContext from '../utils/productContext';
+import React from 'react';
 
 const Hero = ({ imgSrc, title }) => {
-  const productData = useContext(productContext);
-
   return (
     <div className="relative h-450">
       <img

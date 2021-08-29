@@ -27,7 +27,7 @@ const Navbar = () => {
             </div>
             <ul className="hidden md:flex justify-between items-center font-semibold space-x-8 text-sm">
               <li className="link tracking-wide">Shop all</li>
-              <li className="link tracking-wide">Featured items</li>
+              <li className="link tracking-wide">Most Popular</li>
             </ul>
           </div>
           {/* Middle */}

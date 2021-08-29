@@ -5,6 +5,7 @@ import productContext from './utils/productContext';
 import Home from './pages/Home';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import ProductDetail from './pages/ProductDetail';
 
 function App() {
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -29,6 +30,7 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/products/:id" component={ProductDetail} />
         </Switch>
       </Router>
     </productContext.Provider>

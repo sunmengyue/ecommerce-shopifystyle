@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import productContext from '../utils/productContext';
 import Product from './Product';
 import Hero from './Hero';
