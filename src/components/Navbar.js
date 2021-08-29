@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Search from './Search';
 import {
   MenuIcon,
@@ -26,13 +27,15 @@ const Navbar = () => {
               </button>
             </div>
             <ul className="hidden md:flex justify-between items-center font-semibold space-x-8 text-sm">
-              <li className="link tracking-wide">Shop all</li>
-              <li className="link tracking-wide">Most Popular</li>
+              <li className="link tracking-wide">Shop All</li>
+              <li className="link tracking-wide">About Us</li>
             </ul>
           </div>
           {/* Middle */}
           <div className="cursor-pointer">
-            <h4 className="uppercase font-bold tracking-wider">mstyle</h4>
+            <h4 className="uppercase font-bold tracking-wider">
+              <Link to="/">mstyle</Link>
+            </h4>
           </div>
           {/* right */}
           <div className="relative md:hidden">

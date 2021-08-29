@@ -3,8 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import axios from 'axios';
 import productContext from './utils/productContext';
 import Home from './pages/Home';
-import Header from './components/Header';
-import Navbar from './components/Navbar';
+
 import ProductDetail from './pages/ProductDetail';
 
 function App() {
@@ -25,8 +24,6 @@ function App() {
         products,
       }}
     >
-      <Header />
-      <Navbar />
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
