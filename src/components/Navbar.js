@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Search from './Search';
 import {
   MenuIcon,
@@ -9,13 +9,18 @@ import {
 import productContext from '../utils/productContext';
 
 const Navbar = () => {
+  const history = useHistory();
+  const toCheckout = () => {
+    history.push('/checkout');
+  };
+
   const navbarData = useContext(productContext);
   const { showSearchBar, setShowSearchBar } = navbarData;
   const toggleSearchBar = () => {
     setShowSearchBar(!showSearchBar);
   };
   return (
-    <div className="bg-brown-light px-10 top-0">
+    <div className="bg-brown-light px-10 top-0 sticky z-50">
       <nav className="py-5 ">
         <div className="max-w-6xl m-auto flex justify-between items-center ">
           {/* left */}
@@ -38,7 +43,7 @@ const Navbar = () => {
             </h4>
           </div>
           {/* right */}
-          <div className="relative md:hidden">
+          <div className="relative md:hidden" onClick={toCheckout}>
             <ShoppingBagIcon className="h-6 cursor-pointer" />
             <p className="absolute -top-2 right-0 text-xs">0</p>
           </div>
@@ -49,7 +54,9 @@ const Navbar = () => {
               </button>
             </li>
             <li className="link">Sign In</li>
-            <li className="link">Bag (0)</li>
+            <li className="link" onClick={toCheckout}>
+              Bag (0)
+            </li>
           </ul>
         </div>
       </nav>
