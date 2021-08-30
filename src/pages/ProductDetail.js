@@ -1,15 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Currency from 'react-currency-formatter';
 import { StarIcon } from '@heroicons/react/solid';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 
-const ProductDetail = ({ match, products }) => {
+const ProductDetail = ({ match }) => {
+  const [product, setproduct] = useState({});
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${match.params.id}`);
+      setproduct(data);
+    };
+    fetchProduct();
+  }, [match]);
+
   const MIN = 1;
   const MAX = 5;
   const [rating] = useState(Math.floor(Math.random() * (MAX - MIN + 1) + MIN));
-  const productId = match.params.id * 1;
-  const product = products.find((product) => product.id === productId);
 
   return (
     <>
@@ -31,7 +40,7 @@ const ProductDetail = ({ match, products }) => {
               {product.title}
             </h5>
             <div className="mb-3 lg:mb-4">
-              <Currency quantity={product.price} currency="USD" />
+              <p>${product.price}</p>
             </div>
             <div className="flex mb-2 lg:mb-5">
               {Array(rating)

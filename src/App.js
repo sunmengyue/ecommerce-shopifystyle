@@ -9,9 +9,11 @@ function App() {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    axios
-      .get('https://fakestoreapi.com/products')
-      .then((res) => setProducts(res.data));
+    const fetchProudcts = async () => {
+      const { data } = await axios.get('/api/products');
+      setProducts(data);
+    };
+    fetchProudcts();
   }, []);
   return (
     <Router>
