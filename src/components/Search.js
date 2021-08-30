@@ -1,10 +1,7 @@
-import React, { useContext, useState } from 'react';
-import productContext from '../utils/productContext';
+import React, { useState } from 'react';
 import { XIcon, SearchIcon } from '@heroicons/react/outline';
 
-const Search = () => {
-  const searchbarData = useContext(productContext);
-  const { showSearchBar, setShowSearchBar } = searchbarData;
+const Search = ({ showSearchBar, setShowSearchBar }) => {
   const [text, setText] = useState('');
   const handleChange = (e) => {
     setText(e.target.value);

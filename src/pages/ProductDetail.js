@@ -1,16 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Currency from 'react-currency-formatter';
 import { StarIcon } from '@heroicons/react/solid';
-import productContext from '../utils/productContext';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 
-const ProductDetail = ({ match }) => {
+const ProductDetail = ({ match, products }) => {
   const MIN = 1;
   const MAX = 5;
   const [rating] = useState(Math.floor(Math.random() * (MAX - MIN + 1) + MIN));
-
-  const { products } = useContext(productContext);
   const productId = match.params.id * 1;
   const product = products.find((product) => product.id === productId);
 

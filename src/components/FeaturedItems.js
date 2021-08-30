@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
-import productContext from '../utils/productContext';
+import React from 'react';
 import Hero from './Hero';
 import Product from './Product';
 
-const FeaturedItems = () => {
-  const productsData = useContext(productContext);
-  const { products } = productsData;
+const FeaturedItems = ({ products }) => {
   return (
     <div>
       <Hero imgSrc="./images/featured.jpg" title="Build your own style" />

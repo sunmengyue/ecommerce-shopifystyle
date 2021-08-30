@@ -1,11 +1,8 @@
-import React, { useContext } from 'react';
-import productContext from '../utils/productContext';
+import React from 'react';
 import Product from './Product';
 import Hero from './Hero';
 
-const NewArrivals = () => {
-  const productsData = useContext(productContext);
-  const { products } = productsData;
+const NewArrivals = ({ products }) => {
   return (
     <div>
       <Hero imgSrc="./images/newArrivals.jpg" title="See New Arrivals" />

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Search from './Search';
 import {
@@ -6,16 +6,15 @@ import {
   SearchIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/outline';
-import productContext from '../utils/productContext';
 
 const Navbar = () => {
+  const [showSearchBar, setShowSearchBar] = useState(false);
+
   const history = useHistory();
   const toCheckout = () => {
     history.push('/checkout');
   };
 
-  const navbarData = useContext(productContext);
-  const { showSearchBar, setShowSearchBar } = navbarData;
   const toggleSearchBar = () => {
     setShowSearchBar(!showSearchBar);
   };
@@ -60,7 +59,12 @@ const Navbar = () => {
           </ul>
         </div>
       </nav>
-      {showSearchBar && <Search />}
+      {showSearchBar && (
+        <Search
+          showSearchBar={showSearchBar}
+          setShowSearchBar={setShowSearchBar}
+        />
+      )}
     </div>
   );
 };
