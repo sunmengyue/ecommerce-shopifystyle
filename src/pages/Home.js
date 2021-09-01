@@ -5,6 +5,8 @@ import FeaturedItems from '../components/FeaturedItems';
 import NewArrivals from '../components/NewArrivals';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
+import Loader from '../components/Loader';
+import Message from '../components/Message';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,9 +22,9 @@ const Home = () => {
       <Navbar />
       <div className="bg-gray-100">
         {loading ? (
-          <h2>Loading</h2>
+          <Loader />
         ) : error ? (
-          <h3>{error}</h3>
+          <Message>{error}</Message>
         ) : (
           <>
             <NewArrivals products={products} />

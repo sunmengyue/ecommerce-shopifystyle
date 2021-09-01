@@ -5,8 +5,8 @@ import Currency from 'react-currency-formatter';
 
 const Product = ({ product }) => {
   const history = useHistory();
-  const toProductDetail = () => {
-    history.push(`/products/${product.id}`);
+  const toProductDetails = () => {
+    history.push(`/products/${product._id}`);
   };
   const MIN = 1;
   const MAX = 5;
@@ -16,7 +16,7 @@ const Product = ({ product }) => {
     <div className="flex flex-col items-center mt-6 ">
       <div
         className="bg-white cursor-pointer relative w-280 h-280 p-5 flex items-center justify-center transform hover:scale-105 transition duration-100 ease-in-out"
-        onClick={toProductDetail}
+        onClick={toProductDetails}
       >
         <p className="absolute right-4 top-3 text-xs italic text-gray-400">
           {product.category}
