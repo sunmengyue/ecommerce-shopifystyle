@@ -10,6 +10,7 @@ const ProductDetail = ({ match }) => {
 
   useEffect(() => {
     const fetchProduct = async () => {
+      console.log(match.params.id);
       const { data } = await axios.get(`/api/products/${match.params.id}`);
       setproduct(data);
     };
