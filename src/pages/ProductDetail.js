@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { StarIcon } from '@heroicons/react/solid';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
+import Rating from '../components/Rating';
 
-const ProductDetail = ({ match }) => {
+const ProductDetail = ({ history, match }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,9 +17,11 @@ const ProductDetail = ({ match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  const MIN = 1;
-  const MAX = 5;
-  const [rating] = useState(Math.floor(Math.random() * (MAX - MIN + 1) + MIN));
+  const [qty, setQty] = useState(0);
+
+  const addToBagHandler = () => {
+    history.push(`/cart/${match.params.id}?qty=${qty}`);
+  };
 
   return (
     <>
@@ -48,30 +50,34 @@ const ProductDetail = ({ match }) => {
               <div className="mb-3 lg:mb-4">
                 <p>${product.price}</p>
               </div>
-              <div className="flex mb-2 lg:mb-5">
-                {Array(rating)
-                  .fill()
-                  .map((star, i) => (
-                    <StarIcon className="h-5" key={i} />
-                  ))}
-              </div>
+              <Rating value={product.rating} />
               <p>{product.description}</p>
+              <p className="mt-4">
+                <span className="font-light">Status</span>:{' '}
+                {product.countInStock ? 'In Stock' : 'Out of Stock'}
+              </p>
               <div className="mt-3 lg:mt-5">
                 <label htmlFor="quantiry" className="uppercase font-light  ">
                   Quantity
                 </label>
                 <select
-                  name="quantity"
+                  name="qty"
                   id="quantity"
+                  value={qty}
+                  onChange={(e) => setQty(e.target.value)}
                   className="border border-gray-600 py-1 px-3 focus:outline-none ml-4 lg:py-2 lg:px-4"
                 >
-                  <option value="">1</option>
-                  <option value="">2</option>
-                  <option value="">3</option>
-                  <option value="">4</option>
+                  {[...Array(product.countInStock).keys()].map((x) => (
+                    <option key={x + 1} value={x + 1}>
+                      {x + 1}
+                    </option>
+                  ))}
                 </select>
               </div>
-              <button className="uppercase border border-gray-600 py-3 px-7 mt-5 text-white bg-black lg:mt-7 hover:bg-gray-800">
+              <button
+                className="uppercase border border-gray-600 py-3 px-7 mt-5 text-white bg-black lg:mt-7 hover:bg-gray-800"
+                onClick={addToBagHandler}
+              >
                 Add to bag
               </button>
             </div>

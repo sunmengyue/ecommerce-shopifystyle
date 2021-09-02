@@ -2,15 +2,13 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { StarIcon } from '@heroicons/react/solid';
 import Currency from 'react-currency-formatter';
+import Rating from './Rating';
 
 const Product = ({ product }) => {
   const history = useHistory();
   const toProductDetails = () => {
     history.push(`/products/${product._id}`);
   };
-  const MIN = 1;
-  const MAX = 5;
-  const [rating] = useState(Math.floor(Math.random() * (MAX - MIN + 1) + MIN));
 
   return (
     <div className="flex flex-col items-center mt-6 ">
@@ -31,13 +29,7 @@ const Product = ({ product }) => {
       </div>
       <div className="flex flex-col items-center justify-center w-280 text-center">
         <h4 className="my-4 px-6">{product.title}</h4>
-        <div className="flex">
-          {Array(rating)
-            .fill()
-            .map((star, i) => (
-              <StarIcon className="h-5" key={i} />
-            ))}
-        </div>
+        <Rating value={product.rating} />
         <div className="mb-5">
           <Currency quantity={product.price} currency="USD" />
         </div>
