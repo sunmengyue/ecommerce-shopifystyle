@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { StarIcon } from '@heroicons/react/solid';
 import Currency from 'react-currency-formatter';
 import Rating from './Rating';
 

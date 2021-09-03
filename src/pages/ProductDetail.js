@@ -17,7 +17,7 @@ const ProductDetail = ({ history, match }) => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
 
   const addToBagHandler = () => {
     history.push(`/cart/${match.params.id}?qty=${qty}`);
@@ -57,7 +57,7 @@ const ProductDetail = ({ history, match }) => {
                 {product.countInStock ? 'In Stock' : 'Out of Stock'}
               </p>
               <div className="mt-3 lg:mt-5">
-                <label htmlFor="quantiry" className="uppercase font-light  ">
+                <label htmlFor="quantity" className="uppercase font-light  ">
                   Quantity
                 </label>
                 <select
