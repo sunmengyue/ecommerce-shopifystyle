@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import CheckoutProduct from '../components/CheckoutProduct';
-import { addToCart } from '../actions/cartActions';
+import { addToCart, removeFromCart } from '../actions/cartActions';
 
 const Cart = ({ match, location, history }) => {
   const productId = match.params.id;
@@ -21,7 +21,7 @@ const Cart = ({ match, location, history }) => {
   }, [dispatch, productId, qty]);
 
   const removeFromCartHandler = (id) => {
-    console.log('remove');
+    dispatch(removeFromCart(id));
   };
 
   return (
@@ -45,21 +45,23 @@ const Cart = ({ match, location, history }) => {
               'Your shopping bag'
             )}
           </h2>
+
+          {/* left: cart items */}
           {cartItems.map((item) => (
             <CheckoutProduct
               product={item}
               cartItems={cartItems}
-              key={item.product}
-              remove={removeFromCartHandler}
+              key={item._id}
+              remove={() => removeFromCartHandler(item._id)}
             />
           ))}
         </div>
+
         {/* right */}
         <div className="m-5 flex-grow">
           <h2 className="text-2xl pb-4 uppercase tracking-widest">
             subtotal:{' '}
             {cartItems.reduce((acc, cur) => {
-              console.log(acc);
               return acc + cur.qty;
             }, 0)}{' '}
             items
