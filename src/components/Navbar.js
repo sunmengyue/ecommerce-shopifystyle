@@ -11,8 +11,8 @@ const Navbar = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
 
   const history = useHistory();
-  const toCheckout = () => {
-    history.push('/checkout');
+  const toCart = () => {
+    history.push('/cart');
   };
 
   const toggleSearchBar = () => {
@@ -42,7 +42,7 @@ const Navbar = () => {
             </h4>
           </div>
           {/* right */}
-          <div className="relative md:hidden" onClick={toCheckout}>
+          <div className="relative md:hidden" onClick={toCart}>
             <ShoppingBagIcon className="h-6 cursor-pointer" />
             <p className="absolute -top-2 right-0 text-xs">0</p>
           </div>
@@ -53,7 +53,7 @@ const Navbar = () => {
               </button>
             </li>
             <li className="link">Sign In</li>
-            <li className="link" onClick={toCheckout}>
+            <li className="link" onClick={toCart}>
               Bag (0)
             </li>
           </ul>

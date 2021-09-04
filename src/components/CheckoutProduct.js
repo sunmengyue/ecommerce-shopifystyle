@@ -3,13 +3,8 @@ import { TrashIcon } from '@heroicons/react/solid';
 import { addToCart } from '../actions/cartActions';
 import { useDispatch } from 'react-redux';
 
-const CheckoutProduct = ({ product, qty }) => {
+const CheckoutProduct = ({ product, remove, cartItems }) => {
   const dispatch = useDispatch();
-  console.log(product);
-  const removeFromCartHandler = (id) => {
-    console.log('remove');
-  };
-
   return (
     <div className="flex flex-col space-y-3 items-start sm:flex-row sm:items-start sm:space-x-2 sm:justify-around border-b pb-3 last:border-b-0">
       <img
@@ -19,7 +14,7 @@ const CheckoutProduct = ({ product, qty }) => {
         width={100}
         className="object-contain"
       />
-      <div>
+      <div className="w-64 md:w-72 ">
         <p className="mb-1">{product.title}</p>
         <p>${product.price}</p>
         <label htmlFor="quantity" className="uppercase font-light  ">
@@ -28,7 +23,7 @@ const CheckoutProduct = ({ product, qty }) => {
         <select
           name="qty"
           id="quantity"
-          value={product.countInStock}
+          value={product.qty}
           onChange={(e) =>
             dispatch(addToCart(product._id, Number(e.target.value)))
           }
@@ -41,7 +36,11 @@ const CheckoutProduct = ({ product, qty }) => {
           ))}
         </select>
       </div>
-      <TrashIcon className="h-6 cursor-pointer" />
+      {cartItems.length !== 0 && (
+        <button onClick={remove}>
+          <TrashIcon className="h-6 cursor-pointer" />
+        </button>
+      )}
     </div>
   );
 };

@@ -3,17 +3,18 @@ import { CART_ADD_ITEM, CART_REMOVE_ITEM } from '../constants/cartConstants';
 export const cartReducers = (state = { cartItems: [] }, action) => {
   switch (action.type) {
     case CART_ADD_ITEM:
-      const item = action.payload;
-      const existItem = state.cartItems.find((x) => x._id === item._id);
+      const existItem = state.cartItems.find(
+        (item) => item._id === action.payload._id,
+      );
       if (existItem) {
         return {
           ...state,
-          cartItems: state.cartItems.map((x) =>
-            x._id === existItem._id ? item : x,
+          cartItems: state.cartItems.map((item) =>
+            item._id === existItem._id ? action.payload : item,
           ),
         };
       } else {
-        return { ...state, cartItems: [...state.cartItems, item] };
+        return { ...state, cartItems: [...state.cartItems, action.payload] };
       }
     default:
       return state;
