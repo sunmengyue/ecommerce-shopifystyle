@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Search from './Search';
 import {
@@ -6,9 +7,13 @@ import {
   SearchIcon,
   ShoppingBagIcon,
 } from '@heroicons/react/outline';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import { logout } from '../actions/userActions';
 
 const Navbar = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
+
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const history = useHistory();
   const toCart = () => {
@@ -17,6 +22,15 @@ const Navbar = () => {
 
   const toggleSearchBar = () => {
     setShowSearchBar(!showSearchBar);
+  };
+
+  const dispatch = useDispatch();
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+    setShowDropdown(false);
   };
   return (
     <div className="bg-brown-light px-10 top-0 sticky z-50">
@@ -52,7 +66,41 @@ const Navbar = () => {
                 <SearchIcon className="h-6" />
               </button>
             </li>
-            <li className="link">Sign In</li>
+            {userInfo ? (
+              <div className="flex flex-col">
+                <li className="uppercase flex">
+                  <p className="mr-1">{userInfo.name}</p>
+                  {!showDropdown ? (
+                    <ChevronDownIcon
+                      className="h-5 cursor-pointer"
+                      onClick={() => {
+                        setShowDropdown(true);
+                      }}
+                    />
+                  ) : (
+                    <ChevronUpIcon
+                      onClick={() => {
+                        setShowDropdown(false);
+                      }}
+                      className="h-5 cursor-pointer"
+                    />
+                  )}
+                </li>
+                {showDropdown && (
+                  <ul className="absolute mt-6 bg-brown-light p-5 space-y-4 ">
+                    <li className="link">Profile</li>
+                    <li className="link" onClick={logoutHandler}>
+                      Logout
+                    </li>
+                  </ul>
+                )}
+              </div>
+            ) : (
+              <Link to="/login">
+                <li className="link">Sign In</li>
+              </Link>
+            )}
+
             <li className="link" onClick={toCart}>
               Bag (0)
             </li>

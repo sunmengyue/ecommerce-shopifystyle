@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Header from '../components/Header';
-import Navbar from '../components/Navbar';
 import Loader from '../components/Loader';
 import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
@@ -24,9 +22,7 @@ const ProductDetail = ({ history, match }) => {
   };
 
   return (
-    <>
-      <Header />
-      <Navbar />
+    <div>
       {loading ? (
         <Loader />
       ) : error ? (
@@ -84,7 +80,7 @@ const ProductDetail = ({ history, match }) => {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

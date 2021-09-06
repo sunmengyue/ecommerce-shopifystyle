@@ -9,6 +9,18 @@
   .button {
     @apply cursor-pointer bg-black py-2 px-4 text-white text-sm uppercase w-40 m-auto hover:bg-gray-800 md:text-base md:py-3 md:px-6;
   }
+  .form__container {
+    @apply max-w-xl m-auto mt-14 space-y-7 tracking-widest p-5;
+  }
+  .form {
+    @apply flex flex-col space-y-3 items-start;
+  }
+  .form__field {
+    @apply flex flex-col w-full;
+  }
+  .input {
+    @apply bg-gray-100 py-3 px-9 flex-grow tracking-wide focus:outline-none;
+  }
 }
 
 @layer utilities {
