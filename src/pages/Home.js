@@ -4,7 +4,6 @@ import { listProducts } from '../actions/productActions';
 import FeaturedItems from '../components/FeaturedItems';
 import NewArrivals from '../components/NewArrivals';
 import Loader from '../components/Loader';
-import Message from '../components/Message';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Home = () => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message>{error}</Message>
+        <div className="error_msg">{error}</div>
       ) : (
         <>
           <NewArrivals products={products} />

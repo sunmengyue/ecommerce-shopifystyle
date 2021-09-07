@@ -7,6 +7,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
+import Profile from './pages/Profile';
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
       <Navbar />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
+      <Route path="/profile" component={Profile} />
       <Route path="/products/:id" component={ProductDetail} />
       <Route path="/cart/:id?" component={Cart} />
       <Route exact path="/" component={Home} />

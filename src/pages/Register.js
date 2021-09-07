@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { register } from '../actions/userActions';
 
@@ -15,7 +14,6 @@ const Register = ({ location, history }) => {
   const dispatch = useDispatch();
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
-
   const redirect = location.search ? location.search.split('=')[1] : '/';
 
   useEffect(() => {
@@ -35,8 +33,8 @@ const Register = ({ location, history }) => {
   return (
     <div className="form__container">
       <h1 className="text-4xl uppercase tracking-widest">Sign up</h1>
-      {message && <Message>{message}</Message>}
-      {error && <Message>{error}</Message>}
+      {message && <div className="error_msg">{message}</div>}
+      {error && <div className="error_msg">{error}</div>}
       {loading && <Loader />}
 
       <form onSubmit={submitHandler} className="form">

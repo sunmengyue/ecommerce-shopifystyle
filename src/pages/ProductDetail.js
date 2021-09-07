@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
-import Message from '../components/Message';
 import { listProductDetails } from '../actions/productActions';
 import Rating from '../components/Rating';
 
@@ -26,7 +25,7 @@ const ProductDetail = ({ history, match }) => {
       {loading ? (
         <Loader />
       ) : error ? (
-        <Message>{error}</Message>
+        <div className="error_msg">{error}</div>
       ) : (
         <div className="max-w-7xl m-auto">
           <div className="flex flex-col items-center justify-center p-14 md:flex-row md:justify-between md:items-center lg:justify-around">

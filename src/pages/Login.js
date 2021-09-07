@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { login } from '../actions/userActions';
 
@@ -28,7 +27,7 @@ const Login = ({ location, history }) => {
   return (
     <div className="form__container">
       <h1 className="text-4xl uppercase tracking-widest">Sign in</h1>
-      {error && <Message>{error}</Message>}
+      {error && <div className="error_msg">{error}</div>}
       {loading && <Loader />}
 
       {/* email */}

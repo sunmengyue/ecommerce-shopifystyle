@@ -28,6 +28,10 @@ const Navbar = () => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
+  const toProfile = () => {
+    history.push('/profile');
+    setShowDropdown(false);
+  };
   const logoutHandler = () => {
     dispatch(logout());
     setShowDropdown(false);
@@ -88,7 +92,10 @@ const Navbar = () => {
                 </li>
                 {showDropdown && (
                   <ul className="absolute mt-6 bg-brown-light p-5 space-y-4 ">
-                    <li className="link">Profile</li>
+                    <li className="link" onClick={toProfile}>
+                      Profile
+                    </li>
+
                     <li className="link" onClick={logoutHandler}>
                       Logout
                     </li>
