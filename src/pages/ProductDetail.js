@@ -33,8 +33,8 @@ const ProductDetail = ({ history, match }) => {
               <img
                 src={product.image}
                 alt="product"
-                width={180}
-                height={180}
+                width={160}
+                height={160}
                 className="obj-contain m-auto"
               />
             </div>

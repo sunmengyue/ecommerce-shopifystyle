@@ -22,6 +22,10 @@ const Cart = ({ match, location, history }) => {
     dispatch(removeFromCart(id));
   };
 
+  const checkoutHandler = () => {
+    history.push('/login?redirect=shipping');
+  };
+
   return (
     <div className="max-w-screen-2xl m-auto p-8 md:flex justify-center space-x-5">
       {/* left */}
@@ -69,7 +73,10 @@ const Cart = ({ match, location, history }) => {
             }, 0)
             .toFixed(2)}
         </p>
-        <button className="uppercase bg-black text-white py-3 px-9 mt-5 tracking-widest">
+        <button
+          className="uppercase bg-black text-white py-3 px-9 mt-5 tracking-widest"
+          onClick={checkoutHandler}
+        >
           Proceed to checkout
         </button>
       </div>

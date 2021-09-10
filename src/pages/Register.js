@@ -32,7 +32,7 @@ const Register = ({ location, history }) => {
   };
   return (
     <div className="form__container">
-      <h1 className="text-4xl uppercase tracking-widest">Sign up</h1>
+      <h1 className="h1">Sign up</h1>
       {message && <div className="error_msg">{message}</div>}
       {error && <div className="error_msg">{error}</div>}
       {loading && <Loader />}
@@ -40,7 +40,7 @@ const Register = ({ location, history }) => {
       <form onSubmit={submitHandler} className="form">
         {/* name */}
         <div className="form__field">
-          <label htmlFor="name" className="mb-3">
+          <label htmlFor="name" className="form_label">
             User Name
           </label>
           <input
@@ -57,7 +57,7 @@ const Register = ({ location, history }) => {
 
         {/* email */}
         <div className="form__field">
-          <label htmlFor="email" className="mb-3">
+          <label htmlFor="email" className="form_label">
             Email Address
           </label>
           <input
@@ -74,7 +74,7 @@ const Register = ({ location, history }) => {
 
         {/* password */}
         <div className="form__field">
-          <label htmlFor="password" className="mb-3">
+          <label htmlFor="password" className="form_label">
             Password
           </label>
           <input
@@ -91,7 +91,7 @@ const Register = ({ location, history }) => {
 
         {/* confirm password */}
         <div className="form__field">
-          <label htmlFor="confirmPassword" className="mb-3">
+          <label htmlFor="confirmPassword" className="form_label">
             Confirm Password
           </label>
           <input

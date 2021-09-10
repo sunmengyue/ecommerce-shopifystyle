@@ -26,14 +26,14 @@ const Login = ({ location, history }) => {
   };
   return (
     <div className="form__container">
-      <h1 className="text-4xl uppercase tracking-widest">Sign in</h1>
+      <h1 className="h1">Sign in</h1>
       {error && <div className="error_msg">{error}</div>}
       {loading && <Loader />}
 
       {/* email */}
       <form onSubmit={submitHandler} className="form">
         <div className="form__field">
-          <label htmlFor="email" className="mb-3">
+          <label htmlFor="email" className="form_label">
             Email Address
           </label>
           <input
@@ -50,7 +50,7 @@ const Login = ({ location, history }) => {
 
         {/* password */}
         <div className="form__field">
-          <label htmlFor="password" className="mb-3">
+          <label htmlFor="password" className="form_label">
             Password
           </label>
           <input

@@ -8,12 +8,18 @@ import Register from './pages/Register';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
+import Shipping from './pages/Shipping';
+import Payment from './pages/Payment';
+import PlaceOrder from './pages/PlaceOrder';
 
 const App = () => {
   return (
     <Router>
       <Header />
       <Navbar />
+      <Route path="/placeorder" component={PlaceOrder} />
+      <Route path="/shipping" component={Shipping} />
+      <Route path="/payment" component={Payment} />
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/profile" component={Profile} />

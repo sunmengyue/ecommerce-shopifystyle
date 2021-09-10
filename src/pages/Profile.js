@@ -3,7 +3,6 @@ import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
-import { userUpdateProfileReducer } from '../reducers/userReducers';
 
 const Profile = ({ history }) => {
   const [name, setName] = useState('');
