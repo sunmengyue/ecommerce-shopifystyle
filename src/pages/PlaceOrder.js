@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckOutSteps from '../components/CheckOutSteps';
+import { createOrder } from '../actions/orderActions';
 
-const PlaceOrder = () => {
+const PlaceOrder = ({ history }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
   // Calculate Prices
@@ -16,8 +18,26 @@ const PlaceOrder = () => {
   cart.taxPrice = 0.075 * cart.itemsPrice;
   cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
+  const orderCreate = useSelector((state) => state.orderCreate);
+  const { order, success, error } = orderCreate;
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`);
+    }
+  }, [history, success, order]);
+
   const placeOrderHandler = () => {
-    console.log('Place Order');
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      }),
+    );
   };
 
   return (
@@ -92,9 +112,14 @@ const PlaceOrder = () => {
               <p className="">Total</p>
               <p>${cart.totalPrice.toFixed(2)}</p>
             </div>
-            <button className="bg-black text-white px-9 py-3 uppercase tracking-widest align-center hover:bg-gray-800">
+
+            <button
+              className="bg-black text-white px-9 py-3 uppercase tracking-widest align-center hover:bg-gray-800"
+              onClick={placeOrderHandler}
+            >
               Place Order
             </button>
+            {error && <p className="error_msg">{error}</p>}
           </div>
         </div>
       </div>

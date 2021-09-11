@@ -50,8 +50,8 @@ const Cart = ({ match, location, history }) => {
           <CheckoutProduct
             product={item}
             cartItems={cartItems}
-            key={item._id}
-            remove={() => removeFromCartHandler(item._id)}
+            key={item.product_id}
+            remove={() => removeFromCartHandler(item.product_id)}
           />
         ))}
       </div>

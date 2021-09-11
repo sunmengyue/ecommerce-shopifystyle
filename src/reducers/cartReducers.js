@@ -12,13 +12,13 @@ export const cartReducers = (
   switch (action.type) {
     case CART_ADD_ITEM:
       const existItem = state.cartItems.find(
-        (item) => item._id === action.payload._id,
+        (item) => item.product_id === action.payload.product_id,
       );
       if (existItem) {
         return {
           ...state,
           cartItems: state.cartItems.map((item) =>
-            item._id === existItem._id ? action.payload : item,
+            item.product_id === existItem.product_id ? action.payload : item,
           ),
         };
       } else {
@@ -29,7 +29,7 @@ export const cartReducers = (
       return {
         ...state,
         cartItems: state.cartItems.filter((item) => {
-          return item._id !== action.payload;
+          return item.product_id !== action.payload;
         }),
       };
     case CART_SAVE_SHIPPING_ADDRESS:

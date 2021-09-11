@@ -25,7 +25,7 @@ const CheckoutProduct = ({ product, remove, cartItems }) => {
           id="quantity"
           value={product.qty}
           onChange={(e) =>
-            dispatch(addToCart(product._id, Number(e.target.value)))
+            dispatch(addToCart(product.product_id, Number(e.target.value)))
           }
           className="border border-gray-600 py-1 px-3 focus:outline-none ml-4 lg:py-2 lg:px-4"
         >
