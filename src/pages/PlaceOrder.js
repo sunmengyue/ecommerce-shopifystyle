@@ -31,6 +31,7 @@ const PlaceOrder = ({ history }) => {
     dispatch(
       createOrder({
         orderItems: cart.cartItems,
+        itemsPrice: cart.itemsPrice,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
         shippingPrice: cart.shippingPrice,
