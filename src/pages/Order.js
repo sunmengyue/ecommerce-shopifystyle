@@ -1,25 +1,70 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { PayPalButton } from 'react-paypal-button-v2';
 import { Link } from 'react-router-dom';
-import { Provider, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../components/Loader';
-import { getOrderDetails } from '../actions/orderActions';
+import { getOrderDetails, payOrder } from '../actions/orderActions';
+import { ORDER_PAY_RESET } from '../constants/orderConstants';
 
-const Order = ({ match }) => {
+const Order = ({ match, history }) => {
   const orderId = match.params.id;
+  const [sdkReady, setSdkReady] = useState(false);
+
   const dispatch = useDispatch();
+
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
 
+  const orderPay = useSelector((state) => state.orderPay);
+  const { loading: loadingPay, success: successPay } = orderPay;
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const keep2decimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
+
   if (!loading) {
-    order.itemsPrice = order.orderItems.reduce(
-      (acc, cur) => acc + cur.price * cur.qty,
-      0,
+    order.itemsPrice = keep2decimals(
+      order.orderItems.reduce((acc, cur) => acc + cur.price * cur.qty, 0),
     );
   }
 
   useEffect(() => {
-    dispatch(getOrderDetails(orderId));
-  }, []);
+    if (!userInfo) {
+      history.push('/login');
+    }
+
+    const addPayPalScript = async () => {
+      const { data: clientId } = await axios.get('/api/config/paypal');
+
+      const script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.async = true;
+      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
+      script.onload = () => {
+        setSdkReady(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    if (!order || successPay || order._id !== orderId) {
+      dispatch({ type: ORDER_PAY_RESET });
+      dispatch(getOrderDetails(orderId));
+    } else if (!order.isPaid) {
+      if (!window.paypal) {
+        addPayPalScript();
+      } else {
+        setSdkReady(true);
+      }
+    }
+  }, [dispatch, orderId, successPay, order]);
+
+  const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(orderId, paymentResult));
+  };
 
   return loading ? (
     <Loader />
@@ -54,7 +99,7 @@ const Order = ({ match }) => {
                 </p>
                 {order.isDelivered ? (
                   <p className="primary_msg">
-                    Delivered to: {order.deliveredAt}
+                    Delivered at: {order.deliveredAt}
                   </p>
                 ) : (
                   <p>Not dilivered</p>
@@ -64,7 +109,9 @@ const Order = ({ match }) => {
                 <h2 className="h2 py-5">Payment Method</h2>
                 <p className="py-5">Method: {order.paymentMethod}</p>
                 {order.isPaid ? (
-                  <p className="primary_msg">Paid on: {order.paidAt}</p>
+                  <p className="primary_msg flex items-center">
+                    Paid on: {order.paidAt}
+                  </p>
                 ) : (
                   <p>Not paid yet</p>
                 )}
@@ -80,7 +127,7 @@ const Order = ({ match }) => {
                       key={idx}
                     >
                       <div className="flex justify-between items-center sm:w-1/2">
-                        <div className="p-5 bg-white">
+                        <div className="p-5 bg-white flex-shrink-0">
                           <img
                             src={item.image}
                             alt={item.title}
@@ -102,24 +149,37 @@ const Order = ({ match }) => {
               </div>
             </div>
             {/* Order Info */}
-            <div className="border flex flex-col h-96">
+            <div className="border flex flex-col h-80">
               <h2 className="h2 p-5 border-b">Order Summary</h2>
               <div className="order_summary_item">
                 <p className="">Items</p>
-                <p>${order.itemsPrice.toFixed(2)}</p>
+                <p>${order.itemsPrice}</p>
               </div>
               <div className="order_summary_item">
                 <p className="">Shipping</p>
-                <p>${order.shippingPrice.toFixed(2)}</p>
+                <p>${order.shippingPrice}</p>
               </div>
               <div className="order_summary_item">
                 <p className="">Tax</p>
-                <p>${order.taxPrice.toFixed(2)}</p>
+                <p>${order.taxPrice}</p>
               </div>
               <div className="order_summary_item">
                 <p className="">Total</p>
-                <p>${order.totalPrice.toFixed(2)}</p>
+                <p>${order.totalPrice}</p>
               </div>
+              {!order.isPaid && (
+                <>
+                  {loadingPay && <Loader />}{' '}
+                  {!sdkReady ? (
+                    <Loader />
+                  ) : (
+                    <PayPalButton
+                      amount={order.totalPrice}
+                      onSuccess={successPaymentHandler}
+                    />
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>

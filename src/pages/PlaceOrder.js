@@ -8,15 +8,20 @@ const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
+  const keep2decimals = (num) => {
+    return (Math.round(num * 100) / 100).toFixed(2);
+  };
   // Calculate Prices
-  cart.itemsPrice = cart.cartItems.reduce(
-    (acc, cur) => acc + cur.price * cur.qty,
-    0,
+  cart.itemsPrice = keep2decimals(
+    cart.cartItems.reduce((acc, cur) => acc + cur.price * cur.qty, 0),
   );
 
   cart.shippingPrice = cart.itemsPrice > 45 ? 0 : 17;
-  cart.taxPrice = 0.075 * cart.itemsPrice;
-  cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
+  cart.taxPrice = keep2decimals(0.075 * cart.itemsPrice);
+  cart.totalPrice =
+    Number(cart.itemsPrice) +
+    Number(cart.shippingPrice) +
+    Number(cart.taxPrice);
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
@@ -73,7 +78,7 @@ const PlaceOrder = ({ history }) => {
                     key={idx}
                   >
                     <div className="flex justify-between items-center sm:w-1/2">
-                      <div className="p-5 bg-white">
+                      <div className="p-5 bg-white flex-shrink-0">
                         <img
                           src={item.image}
                           alt={item.title}
@@ -87,7 +92,7 @@ const PlaceOrder = ({ history }) => {
                     </div>
                     <p className="pt-2">
                       {item.qty} x ${item.price} = $
-                      {(item.qty * item.price).toFixed(2)}
+                      {keep2decimals(item.qty * item.price)}
                     </p>
                   </div>
                 ))
@@ -99,19 +104,19 @@ const PlaceOrder = ({ history }) => {
             <h2 className="h2 p-5 border-b">Order Summary</h2>
             <div className="order_summary_item">
               <p className="">Items</p>
-              <p>${cart.itemsPrice.toFixed(2)}</p>
+              <p>${cart.itemsPrice}</p>
             </div>
             <div className="order_summary_item">
               <p className="">Shipping</p>
-              <p>${cart.shippingPrice.toFixed(2)}</p>
+              <p>${cart.shippingPrice}</p>
             </div>
             <div className="order_summary_item">
               <p className="">Tax</p>
-              <p>${cart.taxPrice.toFixed(2)}</p>
+              <p>${cart.taxPrice}</p>
             </div>
             <div className="order_summary_item">
               <p className="">Total</p>
-              <p>${cart.totalPrice.toFixed(2)}</p>
+              <p>${cart.totalPrice}</p>
             </div>
 
             <button
