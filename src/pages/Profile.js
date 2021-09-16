@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
+import { listMyOrders } from '../actions/orderActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
+import { XIcon } from '@heroicons/react/solid';
 
 const Profile = ({ history }) => {
   const [name, setName] = useState('');
@@ -22,6 +25,9 @@ const Profile = ({ history }) => {
   const userUpdateProfile = useSelector((state) => state.userUpdateProfile);
   const { success } = userUpdateProfile;
 
+  const orderMyList = useSelector((state) => state.orderMyList);
+  const { loading: loadingOrders, error: errorOrders, orders } = orderMyList;
+
   useEffect(() => {
     if (!userInfo) {
       history.push('/login');
@@ -29,6 +35,7 @@ const Profile = ({ history }) => {
       if (!user || !user.name || success) {
         dispatch({ type: USER_UPDATE_PROFILE_RESET });
         dispatch(getUserDetails('profile'));
+        dispatch(listMyOrders());
       } else {
         setName(user.name);
         setEmail(user.email);
@@ -46,8 +53,8 @@ const Profile = ({ history }) => {
   };
 
   return (
-    <div className="max-w-2xl m-auto p-5 md:flex md:justify-around">
-      <div className="mb-8 w-1/2">
+    <div className="max-w-7xl m-auto p-5 md:flex md:justify-between">
+      <div className="mb-8 w-full mr-8 md:w-1/2 lg:w-1/3">
         {success && <div className="primary_msg mb-5">Profile Updated</div>}
         <h1 className="text-3xl uppercase tracking-widest mb-5">
           User Profile
@@ -133,8 +140,51 @@ const Profile = ({ history }) => {
         </form>
       </div>
 
-      <div>
-        <h1 className="uppercase tracking-widest text-3xl">My orders</h1>
+      {/* right side table */}
+      <div className="flex-grow">
+        <h1 className="uppercase tracking-widest text-3xl mb-10">My orders</h1>
+        {loadingOrders ? (
+          <Loader />
+        ) : errorOrders ? (
+          <div className="error_msg">{errorOrders}</div>
+        ) : (
+          <table className="border w-full">
+            <thead>
+              <tr className="border">
+                <th className="uppercase text-left p-2 border-r">Id</th>
+                <th className="uppercase text-left p-2 border-r">total</th>
+                <th className="uppercase text-left p-2 border-r">paid</th>
+                <th className="uppercase text-left p-2 border-r">Dilivered</th>
+                <th className="uppercase text-left p-2 border-r"></th>
+              </tr>
+            </thead>
+            <tbody className="nth-child:bg-gray-200">
+              {orders.map((order) => (
+                <tr key={order._id}>
+                  <td className="text-left p-2 border-r">{order._id}</td>
+                  <td className="text-left p-2 border-r">{order.totalPrice}</td>
+                  <td className="text-left p-2 border-r">
+                    {order.isPaid ? (
+                      order.paidAt.substring(0, 10)
+                    ) : (
+                      <XIcon className="h-5 text-red-700" />
+                    )}
+                  </td>
+                  <td className="text-left p-2 border-r">
+                    {order.isDelivered ? (
+                      order.deliveredAt.substring(0, 10)
+                    ) : (
+                      <XIcon className="h-5 text-red-700" />
+                    )}
+                  </td>
+                  <td className="text-left p-2 border-r">
+                    <Link to={`/order/${order._id}`}>Details</Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );

@@ -81,7 +81,7 @@ const Order = ({ match, history }) => {
             <div className="flex-grow flex flex-col mb-8 md:w-1/2">
               <div className="border-b">
                 <h2 className="h2 py-5">Shipping</h2>
-                <p>Name: {order.user.name}</p>
+                <p>Name: {userInfo.name}</p>
                 <p>
                   Email:{' '}
                   <a
