@@ -151,19 +151,19 @@ const Profile = ({ history }) => {
           <table className="border w-full">
             <thead>
               <tr className="border">
-                <th className="uppercase text-left p-2 border-r">Id</th>
-                <th className="uppercase text-left p-2 border-r">total</th>
-                <th className="uppercase text-left p-2 border-r">paid</th>
-                <th className="uppercase text-left p-2 border-r">Dilivered</th>
-                <th className="uppercase text-left p-2 border-r"></th>
+                <th className="th">Id</th>
+                <th className="th">total</th>
+                <th className="th">paid</th>
+                <th className="th">Dilivered</th>
+                <th className="th"></th>
               </tr>
             </thead>
             <tbody className="nth-child:bg-gray-200">
               {orders.map((order) => (
                 <tr key={order._id}>
-                  <td className="text-left p-2 border-r">{order._id}</td>
-                  <td className="text-left p-2 border-r">{order.totalPrice}</td>
-                  <td className="text-left p-2 border-r">
+                  <td className="td">{order._id}</td>
+                  <td className="td">{order.totalPrice}</td>
+                  <td className="td">
                     {order.isPaid ? (
                       order.paidAt.substring(0, 10)
                     ) : (
@@ -177,7 +177,7 @@ const Profile = ({ history }) => {
                       <XIcon className="h-5 text-red-700" />
                     )}
                   </td>
-                  <td className="text-left p-2 border-r">
+                  <td className="td link">
                     <Link to={`/order/${order._id}`}>Details</Link>
                   </td>
                 </tr>

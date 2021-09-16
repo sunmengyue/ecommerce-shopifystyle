@@ -17,6 +17,14 @@
     @apply text-gray-300;
   }
 
+  .th {
+    @apply uppercase text-left p-2 border-r;
+  }
+
+  .td {
+    @apply text-left p-2 border-r;
+  }
+
   .button {
     @apply cursor-pointer bg-black py-2 px-4 text-white text-sm uppercase w-40 m-auto hover:bg-gray-800 md:text-base md:py-3 md:px-6;
   }
