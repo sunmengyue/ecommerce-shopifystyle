@@ -49,11 +49,11 @@
     @apply bg-gray-100 py-3 px-9 flex-grow tracking-wide focus:outline-none;
   }
   .error_msg {
-    @apply bg-red-300 text-red-900 h-1/5 font-semibold p-5;
+    @apply bg-red-300 text-red-900 h-1/5 font-semibold p-5 flex items-center;
   }
 
   .primary_msg {
-    @apply bg-blue-300 text-blue-900 h-1/5 font-semibold p-5;
+    @apply bg-blue-300 text-blue-900 h-1/5 font-semibold p-5 flex items-center;
   }
 }
 

@@ -9,6 +9,7 @@ import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
 import Shipping from './pages/Shipping';
+import ShopAll from './pages/ShopAll';
 import Payment from './pages/Payment';
 import PlaceOrder from './pages/PlaceOrder';
 import Order from './pages/Order';
@@ -19,6 +20,7 @@ const App = () => {
       <Header />
       <Navbar />
       <Route path="/order/:id" component={Order} />
+      <Route path="/shopAll" component={ShopAll} />
       <Route path="/placeorder" component={PlaceOrder} />
       <Route path="/shipping" component={Shipping} />
       <Route path="/payment" component={Payment} />
@@ -27,6 +29,7 @@ const App = () => {
       <Route path="/profile" component={Profile} />
       <Route path="/products/:id" component={ProductDetail} />
       <Route path="/cart/:id?" component={Cart} />
+      <Route exact path="/search/:keyword" component={Home} />
       <Route exact path="/" component={Home} />
     </Router>
   );
