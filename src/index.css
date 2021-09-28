@@ -55,6 +55,13 @@
   .primary_msg {
     @apply bg-blue-300 text-blue-900 h-1/5 font-semibold p-5 flex items-center;
   }
+
+  .content {
+    @apply overflow-hidden max-h-0 transition-all ease-in-out;
+  }
+  .content.show {
+    @apply h-auto max-h-96 transition-all ease-in-out;
+  }
 }
 
 @layer utilities {
