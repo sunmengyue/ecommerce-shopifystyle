@@ -18,7 +18,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: { backgroundColor: ['nth-child'] },
+    extend: { backgroundColor: ['nth-child'], borderWidth: ['first'] },
   },
   plugins: [require('@tailwindcss/line-clamp'), plugin.nthChild()],
 };

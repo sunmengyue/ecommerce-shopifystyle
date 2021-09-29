@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/solid';
+import { content } from './filterContent';
 
 const Filters = () => {
   const [selected, setSelected] = useState(null);
@@ -54,23 +55,3 @@ const Filters = () => {
 };
 
 export default Filters;
-
-const content = [
-  {
-    filter: 'price',
-    choices: [
-      'under $20.00',
-      '$20.00 - $50.00',
-      '$50.00 - $100.00',
-      'Above 100',
-    ],
-  },
-  {
-    filter: 'category',
-    choices: ["men's clothing", "women's clothing", 'electronics', 'jewelery'],
-  },
-  {
-    filter: 'rating',
-    choices: ['5', '4', '3', '2', '1'],
-  },
-];
