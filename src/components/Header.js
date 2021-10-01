@@ -12,9 +12,11 @@ const Header = () => {
 
   // change header text every 3 s
   const [textIdx, setTextIdx] = useState(0);
+
   const shuffle = useCallback(() => {
     setTextIdx((prevIdx) => (prevIdx === texts.length - 1 ? 0 : prevIdx + 1));
-  }, []);
+  }, [texts.length]);
+
   useEffect(() => {
     let intervalId = setInterval(shuffle, 3000);
     return () => clearInterval(intervalId);

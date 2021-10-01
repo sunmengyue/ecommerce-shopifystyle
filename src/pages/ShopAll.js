@@ -8,11 +8,16 @@ import { listProducts } from '../actions/productActions';
 import Filters from '../components/Filters';
 import LargeFilters from '../components/LargeFilters';
 
-const ShopAll = () => {
+const ShopAll = ({ match }) => {
+  const keyword = match.params.keyword;
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
+  console.log(products);
 
+  const [category, setCategory] = useState('');
+
+  const [sort, setSort] = useState('');
   const [activated, setActivated] = useState(false);
 
   const toggleFilters = () => {
@@ -23,17 +28,13 @@ const ShopAll = () => {
   };
 
   useEffect(() => {
-    dispatch(listProducts());
-  }, [dispatch]);
+    dispatch(listProducts(keyword, sort));
+  }, [dispatch, keyword, sort]);
 
-  let options = [
-    'Price, hight to low',
-    'Price, low to high',
-    'Alphabetically, A - Z',
-    'Rating, high to low',
-    'Rating, low to high',
-  ];
-  const [option, setOption] = useState('');
+  const handleSortChange = (e) => {
+    e.preventDefault();
+    setSort(e.target.value);
+  };
 
   return (
     <div className="max-w-7xl m-auto p-7">
@@ -48,20 +49,20 @@ const ShopAll = () => {
         <div className="hidden md:block md:flex-grow"></div>
         <div className="flex items-center">
           <p className="uppercase font-semibold tracking-widest mr-2">sort:</p>
+
           <select
             name="sort"
             id="sort"
-            value={option}
-            onChange={(e) => {
-              setOption(e.target.value);
-            }}
+            value={sort}
+            onChange={(e) => handleSortChange(e)}
             className="tracking-wide border border-black py-2 px-3 focus:outline-none cursor-pointer"
           >
-            {options.map((option) => (
-              <option key={uuidv4()} value={option}>
-                {option}
-              </option>
-            ))}
+            <option value="-price"> Price, high to low</option>
+            <option value="price">Price, low to high</option>
+            <option value="title">Alphabetically, A - Z</option>
+            <option value="-title">Alphabetically, Z - A</option>
+            <option value="-rating">Rating, high to low</option>
+            <option value="rating">Rating, low to high</option>
           </select>
         </div>
       </div>

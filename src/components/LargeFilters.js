@@ -35,7 +35,7 @@ const LargeFilters = () => {
           </div>
           <div className={selected === idx ? 'content show' : 'content'}>
             {item.choices.map((choice, idx) => (
-              <div>
+              <div key={uuidv4()}>
                 <input
                   type="checkbox"
                   id={`choice${idx}`}
