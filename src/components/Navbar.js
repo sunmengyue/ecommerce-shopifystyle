@@ -25,6 +25,8 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  // const order = useSelector((state) => state.orderDetails.order);
+
   const showCartItemsNo = () => {
     return cartItems ? cartItems.length : 0;
   };

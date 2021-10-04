@@ -1,56 +1,74 @@
 import React, { useState } from 'react';
-import { content } from './filterContent';
+import { useDispatch } from 'react-redux';
+import { listProducts } from '../actions/productActions';
+import { categories } from './filterContent';
 import { v4 as uuidv4 } from 'uuid';
 import { ChevronUpIcon } from '@heroicons/react/solid';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { FormGroup } from '@mui/material';
+import { Checkbox } from '@mui/material';
+import { FormControlLabel } from '@mui/material';
 
 const LargeFilters = () => {
-  const [selected, setSelected] = useState(null);
-  const toggleSelected = (i) => {
-    if (selected === i) {
-      return setSelected(null);
+  const dispatch = useDispatch();
+  const [selected, setSelected] = useState(false);
+  const [checkedCategories, setCheckedCategories] = useState([]);
+
+  const toggleSelected = () => {
+    if (selected) {
+      return setSelected(false);
     }
-    setSelected(i);
+    setSelected(true);
+  };
+
+  const handleCheckCategory = (e) => {
+    let inState = [...checkedCategories];
+    let currentlyChecked = e.target.value;
+    let foundInState = inState.indexOf(currentlyChecked);
+
+    if (foundInState === -1) {
+      inState.push(currentlyChecked);
+    } else {
+      inState.splice(foundInState, 1);
+    }
+    console.log(inState);
+    setCheckedCategories(inState);
+
+    // pass instate up to parent component
   };
 
   return (
-    <div className="w-72">
-      {content.map((item, idx) => (
-        <div
-          key={uuidv4()}
-          className="border-gray-300 border-t first:border-t-0 p-5"
-        >
-          <div
-            className="flex cursor-pointer items-center"
-            onClick={() => toggleSelected(idx)}
-          >
-            <h5 className="uppercase font-semibold py-3 tracking-widest mr-3">
-              {item.filter}
-            </h5>
-            {selected === idx ? (
-              <ChevronUpIcon className="h-6" />
-            ) : (
-              <ChevronDownIcon className="h-6" />
-            )}
-          </div>
-          <div className={selected === idx ? 'content show' : 'content'}>
-            {item.choices.map((choice, idx) => (
-              <div key={uuidv4()}>
-                <input
-                  type="checkbox"
-                  id={`choice${idx}`}
-                  name={`choice${idx}`}
-                  value={choice}
-                  className="mr-2"
+    <div className="border-gray-300 border-t first:border-t-0 p-5 w-72">
+      <div
+        className="flex cursor-pointer items-center"
+        onClick={toggleSelected}
+      >
+        <h5 className="uppercase font-semibold py-3 tracking-widest mr-3">
+          Categories
+        </h5>
+        {selected ? (
+          <ChevronUpIcon className="h-6" />
+        ) : (
+          <ChevronDownIcon className="h-6" />
+        )}
+      </div>
+      <div className={selected ? 'content show' : 'content'}>
+        <FormGroup>
+          {categories.map((category) => (
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={handleCheckCategory}
+                  value={category.category}
+                  id={String(category.id)}
                 />
-                <label htmlFor={`choice${idx}`} className="tracking-wide">
-                  {choice}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
+              }
+              label={category.category}
+              key={category.id}
+            />
+          ))}
+        </FormGroup>
+      </div>
     </div>
   );
 };

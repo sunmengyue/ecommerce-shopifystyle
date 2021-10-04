@@ -13,9 +13,6 @@ const ShopAll = ({ match }) => {
   const dispatch = useDispatch();
   const productList = useSelector((state) => state.productList);
   const { products, loading, error } = productList;
-  console.log(products);
-
-  const [category, setCategory] = useState('');
 
   const [sort, setSort] = useState('');
   const [activated, setActivated] = useState(false);
@@ -36,16 +33,32 @@ const ShopAll = ({ match }) => {
     setSort(e.target.value);
   };
 
+  // const [myFilters, setMyFilters] = useState({
+  //   price: [],
+  //   category: [],
+  // });
+  // const handleFilterCategories = (filters, type) => {
+  //   console.log(filters);
+  //   const newFilters = { ...myFilters };
+  //   newFilters[type] = filters;
+
+  //   if (type === 'price') {
+  //   } else {
+  //     setMyFilters(newFilters);
+  //   }
+  // };
+
   return (
     <div className="max-w-7xl m-auto p-7">
       <h2 className="h2 text-brown text-center">All Products</h2>
       <div className="flex justify-between mt-8">
-        <button
+        {/* <button
           className="py-2 px-6 border border-black mb-3 md:hidden"
           onClick={toggleFilters}
         >
           <AdjustmentsIcon className="h-6" />
-        </button>
+        </button> */}
+
         <div className="hidden md:block md:flex-grow"></div>
         <div className="flex items-center">
           <p className="uppercase font-semibold tracking-widest mr-2">sort:</p>
@@ -66,18 +79,24 @@ const ShopAll = ({ match }) => {
           </select>
         </div>
       </div>
+
       {/* Filters on small screen*/}
-      <div className={activated ? 'content show' : 'content'}>
+      {/* <div className={activated ? 'content show' : 'content'}>
         <Filters />
-      </div>
+      </div> */}
 
       {/* Products */}
       <div className="flex justify-center items-start">
         {/* Filters on medium to large screen */}
-        <div className="hidden md:block mt-8">
-          <LargeFilters />
-        </div>
-        <div className="max-w-screen-2xl m-auto grid sm:grid-cols-2 lg:grid-cols-3 mt-8">
+        {/* <div className="hidden md:block mt-8">
+          <LargeFilters
+            handleFilterCategories={(filters) => {
+              handleFilterCategories(filters);
+            }}
+          />
+        </div> */}
+
+        <div className="max-w-screen-2xl m-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-8">
           {loading ? (
             <Loader />
           ) : error ? (

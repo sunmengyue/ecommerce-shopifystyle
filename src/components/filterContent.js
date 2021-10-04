@@ -1,19 +1,6 @@
-export const content = [
-  {
-    filter: 'price',
-    choices: [
-      'under $20.00',
-      '$20.00 - $50.00',
-      '$50.00 - $100.00',
-      'Above 100',
-    ],
-  },
-  {
-    filter: 'category',
-    choices: ["men's clothing", "women's clothing", 'electronics', 'jewelery'],
-  },
-  {
-    filter: 'rating',
-    choices: ['5', '4', '3', '2', '1'],
-  },
+export const categories = [
+  { id: 1, category: "men's clothing", selected: false },
+  { id: 2, category: "women's clothing", selected: false },
+  { id: 3, category: 'electronics', selected: false },
+  { id: 4, category: 'jewelery', selected: false },
 ];

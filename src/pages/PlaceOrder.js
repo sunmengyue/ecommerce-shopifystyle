@@ -11,6 +11,7 @@ const PlaceOrder = ({ history }) => {
   const keep2decimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   };
+
   // Calculate Prices
   cart.itemsPrice = keep2decimals(
     cart.cartItems.reduce((acc, cur) => acc + cur.price * cur.qty, 0),
@@ -18,10 +19,11 @@ const PlaceOrder = ({ history }) => {
 
   cart.shippingPrice = cart.itemsPrice > 45 ? 0 : 17;
   cart.taxPrice = keep2decimals(0.075 * cart.itemsPrice);
-  cart.totalPrice =
+  cart.totalPrice = keep2decimals(
     Number(cart.itemsPrice) +
-    Number(cart.shippingPrice) +
-    Number(cart.taxPrice);
+      Number(cart.shippingPrice) +
+      Number(cart.taxPrice),
+  );
 
   const orderCreate = useSelector((state) => state.orderCreate);
   const { order, success, error } = orderCreate;
@@ -99,6 +101,7 @@ const PlaceOrder = ({ history }) => {
               )}
             </div>
           </div>
+
           {/* Order Info */}
           <div className="border flex flex-col h-96">
             <h2 className="h2 p-5 border-b">Order Summary</h2>

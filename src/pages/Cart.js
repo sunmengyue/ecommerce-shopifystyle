@@ -23,7 +23,9 @@ const Cart = ({ match, location, history }) => {
   };
 
   const checkoutHandler = () => {
-    history.push('/login?redirect=shipping');
+    if (cartItems.length) {
+      history.push('/login?redirect=shipping');
+    }
   };
 
   return (
@@ -74,7 +76,11 @@ const Cart = ({ match, location, history }) => {
             .toFixed(2)}
         </p>
         <button
-          className="uppercase bg-black text-white py-3 px-9 mt-5 tracking-widest"
+          className={
+            cartItems.length
+              ? 'uppercase bg-black text-white py-3 px-9 mt-5 tracking-widest'
+              : 'uppercase tracking-widest mt-3 disabled'
+          }
           onClick={checkoutHandler}
         >
           Proceed to checkout
