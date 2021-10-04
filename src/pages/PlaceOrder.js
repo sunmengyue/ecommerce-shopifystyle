@@ -3,10 +3,18 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import CheckOutSteps from '../components/CheckOutSteps';
 import { createOrder } from '../actions/orderActions';
+import { ORDER_CREATE_RESET } from '../constants/orderConstants';
+import { USER_DETAILS_RESET } from '../constants/userConstants';
 
 const PlaceOrder = ({ history }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
+
+  if (!cart.shippingAddress.address) {
+    history.push('/shipping');
+  } else if (!cart.paymentMethod) {
+    history.push('/payment');
+  }
 
   const keep2decimals = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
@@ -31,8 +39,11 @@ const PlaceOrder = ({ history }) => {
   useEffect(() => {
     if (success) {
       history.push(`/order/${order._id}`);
+      dispatch({ type: USER_DETAILS_RESET });
+      dispatch({ type: ORDER_CREATE_RESET });
     }
-  }, [history, success, order]);
+    // eslint-disable-next-line
+  }, [history, success]);
 
   const placeOrderHandler = () => {
     dispatch(
