@@ -25,7 +25,7 @@ const Payment = ({ history }) => {
       <CheckOutSteps step1 step2 step3 />
       <h1 className="h1">Payment Method</h1>
       <div className="flex-col space-y-2">
-        <h5 className="form_label text-xl">Select Method</h5>
+        {/* <h5 className="form_label text-xl">Select Method</h5> */}
 
         {/* Paypal and credit card */}
         <div>
@@ -44,7 +44,7 @@ const Payment = ({ history }) => {
         </div>
 
         {/* Stripe */}
-        <div>
+        {/* <div>
           <input
             className="cursor-pointer"
             type="radio"
@@ -56,7 +56,7 @@ const Payment = ({ history }) => {
           <label htmlFor="stripe" className="ml-3 cursor-pointer">
             Stripe
           </label>
-        </div>
+        </div> */}
       </div>
       <button
         className="bg-black text-white uppercase py-3 px-8 tracking-wider cursor-pointer hover:bg-gray-800 transform transition-colors ease-out"
