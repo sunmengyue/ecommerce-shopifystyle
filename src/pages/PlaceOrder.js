@@ -46,17 +46,19 @@ const PlaceOrder = ({ history }) => {
   }, [history, success]);
 
   const placeOrderHandler = () => {
-    dispatch(
-      createOrder({
-        orderItems: cart.cartItems,
-        itemsPrice: cart.itemsPrice,
-        shippingAddress: cart.shippingAddress,
-        paymentMethod: cart.paymentMethod,
-        shippingPrice: cart.shippingPrice,
-        taxPrice: cart.taxPrice,
-        totalPrice: cart.totalPrice,
-      }),
-    );
+    if (cart.cartItems.length) {
+      dispatch(
+        createOrder({
+          orderItems: cart.cartItems,
+          itemsPrice: cart.itemsPrice,
+          shippingAddress: cart.shippingAddress,
+          paymentMethod: cart.paymentMethod,
+          shippingPrice: cart.shippingPrice,
+          taxPrice: cart.taxPrice,
+          totalPrice: cart.totalPrice,
+        }),
+      );
+    }
   };
 
   return (
@@ -113,7 +115,7 @@ const PlaceOrder = ({ history }) => {
             </div>
           </div>
 
-          {/* Order Info */}
+          {/* Order Summary */}
           <div className="border flex flex-col h-96">
             <h2 className="h2 p-5 border-b">Order Summary</h2>
             <div className="order_summary_item">
@@ -122,7 +124,7 @@ const PlaceOrder = ({ history }) => {
             </div>
             <div className="order_summary_item">
               <p className="">Shipping</p>
-              <p>${cart.shippingPrice}</p>
+              <p>${cart.cartItems.length ? cart.shippingPrice : 0}</p>
             </div>
             <div className="order_summary_item">
               <p className="">Tax</p>
@@ -134,7 +136,11 @@ const PlaceOrder = ({ history }) => {
             </div>
 
             <button
-              className="bg-black text-white px-9 py-3 uppercase tracking-widest align-center hover:bg-gray-800"
+              className={
+                cart.cartItems.length
+                  ? 'bg-black text-white px-9 py-3 uppercase tracking-widest align-center hover:bg-gray-800'
+                  : 'disabled'
+              }
               onClick={placeOrderHandler}
             >
               Place Order
